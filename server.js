@@ -9,7 +9,17 @@ const userRoutes = require('./routes/userRoutes')
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.use(cors());
+app.use(cors(
+  {
+  origin: [
+    'https://pick-cric-frontend.vercel.app', // Your Vercel frontend
+    'http://localhost:3000', // Keep localhost for your local testing
+    'http://localhost:5173'  // (Add this if you use Vite)
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}
+));
 app.use(express.json());
 
 // Routes
