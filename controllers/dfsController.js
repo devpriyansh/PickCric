@@ -62,6 +62,7 @@ const staticMatches = require('../utils/staticMatches');
 
 const getLiveJackpots = async (req, res) => {
   try {
+    const now = new Date();
     // Find all jackpots where status is 1 (Live)
     const liveJackpots = await Jackpot.findAll({
       where: {
