@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const ContestUserPrime = require('../models/ContestUserPrime');
 const Jackpot = require('../models/Jackpot');
 const staticMatches = require('../utils/staticMatches');
@@ -64,7 +65,10 @@ const getLiveJackpots = async (req, res) => {
     // Find all jackpots where status is 1 (Live)
     const liveJackpots = await Jackpot.findAll({
       where: {
-        status: 1 
+        // status: 1 ,
+        endDate: {
+          [Op.gt]: now 
+        }
       },
       order: [
         ['createdAt', 'DESC'] // Orders by newest first
